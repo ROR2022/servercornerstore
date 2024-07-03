@@ -10,6 +10,7 @@ console.log('mongoURI(MongooseModule):..', mongoURI);
 const appService = new AppService(new ConfigService());
 const dataEnv = appService.getDataEnv();
 const mongoKey = dataEnv.URI_MONGODB;
+console.log('mongoKey(MongooseModule):..', mongoKey);
 
 @Module({
   imports: [

@@ -8,14 +8,18 @@ dotenv.config();
 //import { setCorsBucket } from './lib/awsLib';
 
 const configService = new ConfigService();
-const app_port = configService.get<string>('PORT');
-const JWT_SECRET = configService.get<string>('JWT_SECRET');
-const JWT_EXPIRESIN = configService.get<string>('JWT_EXPIRESIN');
+const app_port = configService.get<string>('PORT') || process.env.PORT || 3000;
+const JWT_SECRET =
+  configService.get<string>('JWT_SECRET') || process.env.JWT_SECRET || 'secret';
+const JWT_EXPIRESIN =
+  configService.get<string>('JWT_EXPIRESIN') ||
+  process.env.JWT_EXPIRESIN ||
+  '24h';
 
 async function bootstrap() {
   //convertimos el tiempo de expiracion a milisegundos sabiendo el formato de la cadena expresado en horas y eliminando el ultimo caracter que es la letra "h"
   const JWT_EXPIRESIN_MS =
-    parseInt(JWT_EXPIRESIN.slice(0, -1)) * 60 * 60 * 1000;
+    parseInt(JWT_EXPIRESIN?.slice(0, -1)) * 60 * 60 * 1000;
 
   const app = await NestFactory.create(AppModule);
   app.enableCors();

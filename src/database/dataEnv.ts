@@ -1,6 +1,9 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+export const dataMongoURI = process.env.URI_MONGODB || '';
+console.log('dataMongoURI(dataEnv.ts):..', dataMongoURI);
+
 export class DataEnv {
   public URI_MONGODB: string;
   public PORT: string;

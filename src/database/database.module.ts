@@ -4,7 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppService } from 'src/app.service';
 import * as dotenv from 'dotenv';
 dotenv.config();
-import { DataEnv } from './dataEnv';
+import { DataEnv, dataMongoURI } from './dataEnv';
 
 const dataEnvTemp = new DataEnv();
 const myMongoURI = dataEnvTemp.URI_MONGODB;
@@ -23,6 +23,7 @@ console.log('mongoKey(MongooseModule):..', mongoKey);
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         uri:
+          dataMongoURI ||
           myMongoURI ||
           mongoKey ||
           mongoURI ||

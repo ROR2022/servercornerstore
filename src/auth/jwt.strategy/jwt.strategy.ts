@@ -4,22 +4,26 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 //import exp from 'constants';
 
+const jwtSecret = process.env.JWT_SECRET || 'secret';
+const jwtExpiresIn = process.env.JWT_EXPIRESIN || '24h';
+
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     // eslint-disable-next-line prettier/prettier
     private readonly configService: ConfigService,
   ) {
-    const JWT_SECRET = configService.get<string>('JWT_SECRET');
-    const JWT_EXPIRESIN = configService.get<string>('JWT_EXPIRESIN');
-    //console.log('jwt.strategy JWT_SECRET:..',JWT_SECRET);
-    //console.log('jwt.strategy JWT_EXPIRESIN:..',JWT_EXPIRESIN);
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: JWT_SECRET,
-      expiresIn: JWT_EXPIRESIN,
+      secretOrKey: jwtSecret,
+      expiresIn: jwtExpiresIn,
     });
+    //const JWT_SECRET = this.configService.get<string>('JWT_SECRET');
+    //const JWT_EXPIRESIN = this.configService.get<string>('JWT_EXPIRESIN');
+    //console.log('jwt.strategy JWT_SECRET:..',JWT_SECRET);
+    //console.log('jwt.strategy JWT_EXPIRESIN:..',JWT_EXPIRESIN);
+    
   }
   
 

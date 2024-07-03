@@ -5,13 +5,14 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const mongoURI = process.env.URI_MONGODB;
+console.log('mongoURI(MongooseModule):..', mongoURI);
 
 @Module({
   imports: [
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('URI_MONGODB') || mongoURI,
+        uri: mongoURI || configService.get<string>('URI_MONGODB'),
       }),
       inject: [ConfigService],
     }),

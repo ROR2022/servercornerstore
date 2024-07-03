@@ -6,6 +6,8 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 //import { setCorsBucket } from './lib/awsLib';
+const mongoKey = process.env.URI_MONGODB;
+console.log('mongoKey(main.ts):..', mongoKey);
 
 const configService = new ConfigService();
 const app_port = configService.get<string>('PORT') || process.env.PORT || 3000;

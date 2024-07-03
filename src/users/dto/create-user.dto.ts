@@ -1,0 +1,32 @@
+export class CreateUserDto {
+  userRoles: Array<string>;
+  roleId: string;
+  userStatus: string;
+  businessName: string;
+  businessCategory: string;
+  branchCategory: string;
+  slogan: string;
+  shortDescription: string;
+  longDescription: string;
+  email: string;
+  password: string;
+  imageUrl: string;
+  legalName: string;
+  shortAddress: string;
+  phone: string;
+  completeAddress: string;
+  city: string;
+  state: string;
+  country: string;
+  postalCode: string;
+  webSite: string;
+  facebook: string;
+  instagram: string;
+  twitter: string;
+  businessOwner: string;
+  manager: string;
+  cashier: Array<string>;
+  supervisor: Array<string>;
+  handyman: Array<string>;
+  branch: Array<string>;
+}

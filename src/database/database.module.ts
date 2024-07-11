@@ -19,6 +19,9 @@ console.log('mongoKey(MongooseModule):..', mongoKey);
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, // Hace que ConfigModule esté disponible en toda la aplicación
+    }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
